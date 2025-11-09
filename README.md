@@ -79,6 +79,32 @@ Each example follows a consistent pattern:
 
 ## Running the Examples
 
+**Quick Start:** If this is your first time running examples, follow these steps:
+
+1. **Create and activate a virtual environment:**
+   ```bash
+   python3 -m venv .venv
+   source .venv/bin/activate
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   pip install -e .
+   ```
+
+3. **Set up your OpenAI API key:**
+   ```bash
+   cp .env.example .env
+   # Edit .env and add your OPENAI_API_KEY
+   ```
+
+**For subsequent runs:** Make sure your virtual environment is activated:
+
+```bash
+# Activate virtual environment (if not already activated)
+source .venv/bin/activate
+```
+
 ### Option 1: Using the run_example.py helper (Recommended)
 
 The repository includes a helper script that automatically sets up the Python path:
