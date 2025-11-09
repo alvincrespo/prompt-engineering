@@ -21,3 +21,6 @@ def get_response(prompt):
         temperature=0
     )
     return response.choices[0].message.content
+
+# Note: gpt-5-mini triggers this 400 error from the API:
+# "Unsupported value: 'temperature' does not support 0 with this model. Only the default (1) value is supported."
