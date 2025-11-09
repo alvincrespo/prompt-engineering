@@ -1,17 +1,4 @@
-from openai import OpenAI
-from dotenv import load_dotenv
-
-load_dotenv()
-
-client = OpenAI()
-
-def get_response(prompt):
-  response = client.chat.completions.create(
-    model="gpt-4o-mini",
-    messages=[{"role": "user", "content": prompt}],
-    temperature = 0)
-
-  return response.choices[0].message.content
+from utils.openai_client import get_response
 
 text = "Our cutting-edge widget employs state-of-the-art microprocessors and advanced algorithms, delivering unparalleled efficiency and performance for a wide range of applicaitons."
 
