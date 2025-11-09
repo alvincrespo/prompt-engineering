@@ -10,16 +10,27 @@ This repository hosts small, practical examples that show how to effectively use
 
 ```
 prompt-engineering/
-├── introduction-to-prompt-engineering-best-practices/
-│   └── introduction-to-prompt-engineering.py
+├── examples/
+│   ├── best-practices/          # Prompt engineering best practices
+│   ├── code-generation/         # Code explanation and modification
+│   ├── get-response/            # Basic usage examples
+│   ├── getting-started/         # Introduction examples
+│   ├── message-roles/           # OpenAI message role examples
+│   ├── shot-prompting/          # Zero-shot, one-shot, few-shot examples
+│   ├── structured-output/       # Generating structured formats
+│   ├── text-analysis/           # Text categorization and entity extraction
+│   └── text-transformation/     # Grammar, tone, and translation
+├── utils/
+│   └── openai_client.py        # Shared OpenAI helper functions
 ├── requirements.txt
 ├── .env.example
+├── run_example.py              # Helper script for running examples
 └── README.md
 ```
 
 Each example follows a consistent pattern:
-- One folder per topic
-- One runnable `.py` file per folder
+- Organized by topic area
+- Self-contained, runnable scripts
 - Minimal dependencies
 - Clear, inspectable output to stdout
 
@@ -68,14 +79,24 @@ Each example follows a consistent pattern:
 
 ## Running the Examples
 
-Each script is self-contained and can be run directly:
+### Option 1: Using the run_example.py helper (Recommended)
+
+The repository includes a helper script that automatically sets up the Python path:
 
 ```bash
-python examples/code-generation/code-explanation-detailed.py
+python run_example.py examples/getting-started/script.py
+```
+
+### Option 2: Direct execution
+
+Run scripts directly from the project root:
+
+```bash
+python examples/code-generation/explanation/detailed.py
 ```
 
 All examples use:
-- **Model:** `gpt-4o` (unless specified otherwise)
+- **Model:** `gpt-4o-mini` (fast and cost-effective)
 - **Temperature:** `0` (deterministic responses)
 
 ## Code Pattern
@@ -85,8 +106,16 @@ All examples follow a consistent pattern for easy understanding:
 ```python
 from utils.openai_client import get_response
 
-# Example usage
+# Simple prompt (string)
 response = get_response("Your prompt here")
+print(response)
+
+# Advanced usage with message history (list of dicts)
+messages = [
+    {"role": "system", "content": "You are a helpful assistant."},
+    {"role": "user", "content": "Hello!"}
+]
+response = get_response(messages)
 print(response)
 ```
 
@@ -94,36 +123,83 @@ The `get_response` helper function is defined in `utils/openai_client.py` and ha
 - OpenAI client initialization
 - Loading environment variables from `.env`
 - Making chat completion calls with `gpt-4o-mini` and `temperature=0`
+- Supporting both simple string prompts and full message arrays
 
 ## Examples
 
-### Introduction to Prompt Engineering
-**Location:** `introduction-to-prompt-engineering-best-practices/introduction-to-prompt-engineering.py`
+### Best Practices
+**Location:** `examples/best-practices/`
+- `introduction.py` - Core prompt engineering principles and patterns
 
-A minimal example demonstrating the basic pattern of making a chat completion call and retrieving the response.
+### Getting Started
+**Location:** `examples/getting-started/`
+- `script.py` - Minimal example to get started with prompt engineering
+
+### Code Generation
+**Location:** `examples/code-generation/`
+- `explanation/` - Code explanation examples (generic and detailed)
+- `modification/` - Code modification examples (single and multi-step)
+- `input-output.py` - Input/output pattern examples
+- `prompts.py` - Various code generation prompts
+
+### Message Roles
+**Location:** `examples/message-roles/`
+- `script.py` - Using system, user, and assistant message roles
+
+### Shot Prompting
+**Location:** `examples/shot-prompting/`
+- `zero-shot.py` - No examples provided
+- `one-shot.py` - One example provided
+- `few-shot.py` - Multiple examples provided
+- `few-shot-assistant.py` - Using assistant role for examples
+
+### Structured Output
+**Location:** `examples/structured-output/`
+- `conditional/` - Single and multiple conditional outputs
+- `lists/` - Ordered and unordered list generation
+- `custom-output.py` - Custom output formats
+- `paragraphs.py` - Paragraph generation
+- `tables.py` - Table generation
+
+### Text Analysis
+**Location:** `examples/text-analysis/`
+- `categories/` - Text categorization (specified, unspecified, multiple)
+- `entity-extraction/` - Extract specific entities and few-shot patterns
+
+### Text Transformation
+**Location:** `examples/text-transformation/`
+- `adjustments/` - Tone adjustment (generic and targeted)
+- `languages/` - Multi-language translation
+- `grammar.py` - Grammar improvements
+- `multi-step.py` - Multiple transformations in sequence
+
+### Get Response Usage
+**Location:** `examples/get-response/`
+- `import-example.py` - Example of importing and using the get_response helper
 
 ## Contributing
 
 When adding new examples:
 
-1. Create a new folder named after the topic
-2. Add a single `.py` file with a descriptive name
-3. Follow the established `get_response(prompt)` pattern
+1. Place the script in the appropriate category folder under `examples/`
+2. Create subdirectories for related examples when it makes sense
+3. Follow the established `get_response(prompt)` or `get_response(messages)` pattern
 4. Keep dependencies minimal
 5. Print results to stdout for easy inspection
-6. Use `temperature=0` and `gpt-4o` unless the example specifically requires different settings
+6. Use `temperature=0` and `gpt-4o-mini` unless the example specifically requires different settings
+7. Use the `run_example.py` script to test your examples
 
 ## Troubleshooting
 
-**`NameError: name 'client' is not defined`**
-- Make sure you've initialized the OpenAI client at the top of your script:
-  ```python
-  from openai import OpenAI
-  client = OpenAI()
-  ```
+**`ModuleNotFoundError: No module named 'utils'`**
+- Use the `run_example.py` helper script: `python run_example.py examples/path/to/script.py`
+- Or ensure you're running from the project root and have installed with `pip install -e .`
+
+**`NameError: name 'overload' is not defined`**
+- This has been fixed in the latest version. Make sure you've pulled the latest changes.
 
 **401/403 API errors**
-- Verify your `OPENAI_API_KEY` is set correctly
+- Verify your `OPENAI_API_KEY` is set correctly in your `.env` file
 - Check that your API key is valid and has available credits
 - Never hardcode API keys in your scripts
 
