@@ -44,8 +44,10 @@ Each example follows a consistent pattern:
 
 3. **Install dependencies:**
    ```bash
-   pip install -r requirements.txt
+   pip install -e .
    ```
+
+   This installs the project in editable mode, making the `utils` package importable from all example scripts.
 
 4. **Set up your OpenAI API key:**
 
@@ -69,7 +71,7 @@ Each example follows a consistent pattern:
 Each script is self-contained and can be run directly:
 
 ```bash
-python introduction-to-prompt-engineering-best-practices/introduction-to-prompt-engineering.py
+python examples/code-generation/code-explanation-detailed.py
 ```
 
 All examples use:
@@ -81,24 +83,17 @@ All examples use:
 All examples follow a consistent pattern for easy understanding:
 
 ```python
-from openai import OpenAI
-from dotenv import load_dotenv
-
-load_dotenv()
-client = OpenAI()
-
-def get_response(prompt):
-    response = client.chat.completions.create(
-        model="gpt-4o",
-        messages=[{"role": "user", "content": prompt}],
-        temperature=0
-    )
-    return response.choices[0].message.content
+from utils.openai_client import get_response
 
 # Example usage
 response = get_response("Your prompt here")
 print(response)
 ```
+
+The `get_response` helper function is defined in `utils/openai_client.py` and handles:
+- OpenAI client initialization
+- Loading environment variables from `.env`
+- Making chat completion calls with `gpt-4o-mini` and `temperature=0`
 
 ## Examples
 
