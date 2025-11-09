@@ -1,4 +1,4 @@
-# Prompt Engineering with the OpenAI API
+# Prompt Engineering
 
 A collection of self-contained Python scripts demonstrating prompt engineering patterns and best practices using the OpenAI API.
 
@@ -9,7 +9,7 @@ This repository hosts small, practical examples that show how to effectively use
 ## Repository Structure
 
 ```
-prompt-engineering-with-the-openai-api/
+prompt-engineering/
 ├── introduction-to-prompt-engineering-best-practices/
 │   └── introduction-to-prompt-engineering.py
 ├── requirements.txt
@@ -32,8 +32,8 @@ Each example follows a consistent pattern:
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/prompt-engineering-with-the-openai-api.git
-   cd prompt-engineering-with-the-openai-api
+   git clone https://github.com/alvincrespo/prompt-engineering.git
+   cd prompt-engineering
    ```
 
 2. **Create and activate a virtual environment:**
