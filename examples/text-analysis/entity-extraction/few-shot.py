@@ -1,17 +1,4 @@
-from openai import OpenAI
-from dotenv import load_dotenv
-
-load_dotenv()
-
-client = OpenAI()
-
-def get_response(prompt):
-
-  response = client.chat.completions.create(
-    model="gpt-4o-mini",
-    messages=[{"role": "user", "content": prompt}],
-    temperature = 0)
-  return response.choices[0].message.content
+from utils.openai_client import get_response
 
 ticket_1 = """
 Hello, I'm Emma Adams. I'd like to ask about my reservation with the code CAR123.
@@ -51,8 +38,7 @@ Text: {ticket_2} -> Entities: {entities_2}
 Text: {ticket_3} -> Entities:
 """
 
-response = get_response(prompt)
-print(response)
+print(get_response(prompt))
 
 # Output:
 # * Customer Details:

@@ -1,17 +1,4 @@
-from openai import OpenAI
-from dotenv import load_dotenv
-
-load_dotenv()
-
-client = OpenAI()
-
-def get_response(prompt):
-  response = client.chat.completions.create(
-    model="gpt-4o-mini",
-    messages=[{"role": "user", "content": prompt}],
-    temperature = 0)
-
-  return response.choices[0].message.content
+from utils.openai_client import get_response
 
 text = """
 The XYZ Mobile X200: a sleek 6.5-inch Super AMOLED smartphone with a 48MP
@@ -28,8 +15,7 @@ Format the answer as an unordered list.
 ```{text}```
 """
 
-response = get_response(prompt)
-print(response)
+print(get_response(prompt))
 
 # Output:
 # - Product Name: XYZ Mobile X200
