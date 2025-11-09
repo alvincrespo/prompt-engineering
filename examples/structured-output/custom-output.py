@@ -1,17 +1,4 @@
-from openai import OpenAI
-from dotenv import load_dotenv
-
-load_dotenv()
-
-client = OpenAI()
-
-def get_response(prompt):
-
-  response = client.chat.completions.create(
-    model="gpt-4o-mini",
-    messages=[{"role": "user", "content": prompt}],
-    temperature = 0)
-  return response.choices[0].message.content
+from utils.openai_client import get_response
 
 text = "Once upon a time in a quaint little village, there lived a curious young boy named David. David was [...]"
 
@@ -25,8 +12,7 @@ Use the following format for the output:
 
 prompt = instructions + output_format + f"```{text}```"
 
-response = get_response(prompt)
-print(response)
+print(get_response(prompt))
 
 # Output:
 # - Text: Once upon a time in a quaint little village, there lived a curious young boy named David. David was [...]
