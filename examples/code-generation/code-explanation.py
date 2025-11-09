@@ -1,17 +1,4 @@
-from openai import OpenAI
-from dotenv import load_dotenv
-
-load_dotenv()
-
-client = OpenAI()
-
-def get_response(prompt):
-  response = client.chat.completions.create(
-    model="gpt-4o-mini",
-    messages=[{"role": "user", "content": prompt}],
-    temperature = 0)
-
-  return response.choices[0].message.content
+from utils.openai_client import get_response
 
 code = """
 def compute_average_sales_per_quarter(sales):
